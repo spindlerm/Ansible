@@ -1,6 +1,12 @@
-To prep clean pie OS
+To prep clean pie OS, override all settings in th eansible.cfg
 
-ansible-playbook --ask-become-pass bootstrap.yml
+Note:
+
+The --user is the admin account created during inital setup of the pie
+
+
+ansible-playbook --user admin --ask-pass --become-user root  --ask-become-pass bootstrap.yml
+
 
 To install everything else, after initial prep
 
