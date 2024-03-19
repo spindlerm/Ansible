@@ -15,8 +15,19 @@
   - name: create ansible user
     user:
       name: ansible
-      groups: root
+      groups: root, sudo
+
   - name: add ssh key for ansible
     authorized_key:
       user: ansible
       key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF+PANxQ1kgTBetMxOHd50EWqKtLKeOBbfEzPwfFaR+T Ansible"
+
+
+  - name: add sudoers file for simone
+    tags: always
+    copy:
+      src: sudoer_ansible
+      dest: /etc/sudoers.d/ansible
+      owner: root
+      group: root
+      mode: 0440
