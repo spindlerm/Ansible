@@ -31,3 +31,22 @@
       owner: root
       group: root
       mode: 0440
+
+
+  - name: add ssh key for admin/root
+    authorized_key:
+      user: admin
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICiqpOEeCclLUKrfB/gqtdO0ZZ4idG0ucXmCILKE/AL2 matthew@spindler.uk"
+
+  - name: add updated sshd_config file to disable password authentication
+    tags: always
+    copy:
+      src: sshd_config
+      dest: /etc/ssh
+      owner: root
+      group: root
+      mode: 0440
+    notify: restart_sshd
+
+  handlers:
+    - import_tasks: handlers/restart_sshd.yml
