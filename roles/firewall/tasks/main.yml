@@ -19,3 +19,4 @@
     regexp: '^IPV6'
     line: 'IPV6=no'
     state: present
+  notify: restart_ufw
