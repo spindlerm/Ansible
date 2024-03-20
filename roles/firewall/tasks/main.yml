@@ -1,0 +1,21 @@
+- name: Install ufw - firewall
+  apt:
+    name: ufw
+    state: present
+    update_cache: true
+    
+- name: set logging
+  ufw: logging=on
+
+- name: allow port 22
+  ufw: rule=allow port=22
+
+- name: enable ufw
+  ufw: state=enabled policy=allow
+
+
+- lineinfile:
+    dest: /etc/default/ufw
+    regexp: '^IPV6'
+    line: 'IPV6=no'
+    state: present
